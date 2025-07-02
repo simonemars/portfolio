@@ -6,3 +6,6 @@ which I used along with other parameters to construct a random forest that I use
 75% success rate when passing the whole database of data, and had a 72% success rate in the 2025 French Open before the tournament started.
 
 
+Eastern European Surname Classifier: I compiled a csv file with the most common surnames in Croatia, Serbia, Bosnia and Herzegoving, Slovenia and Montenegro, then I created a random forest that help me determine if a given surname is from one of those countries or not. Based on the a test I made, I got it right 96% of the time. I'll create something like this for all countries soon. 
+
+
