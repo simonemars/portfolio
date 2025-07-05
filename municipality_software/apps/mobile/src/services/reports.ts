@@ -18,51 +18,8 @@ import { httpsCallable } from "firebase/functions";
 import { db, storage, functions } from "./firebase";
 import { Report, CreateReportData } from "../types";
 
-// Mock reports data for offline testing
-const mockReports: Report[] = [
-  {
-    id: '1',
-    description: 'Broken street light on Flanatička Street',
-    photoUrls: [],
-    location: { latitude: 44.8666, longitude: 13.8496 },
-    addressText: 'Flanatička ulica, Pula',
-    isPublic: true,
-    status: 'new',
-    urgencyScore: 7.5,
-    voteCount: 12,
-    userId: 'test-user',
-    createdAt: new Date(Date.now() - 86400000), // 1 day ago
-    updatedAt: new Date(Date.now() - 86400000)
-  },
-  {
-    id: '2',
-    description: 'Pothole on the road near the Arena',
-    photoUrls: [],
-    location: { latitude: 44.8733, longitude: 13.8500 },
-    addressText: 'Pula Arena, Pula',
-    isPublic: true,
-    status: 'in_progress',
-    urgencyScore: 8.2,
-    voteCount: 8,
-    userId: 'test-user',
-    createdAt: new Date(Date.now() - 172800000), // 2 days ago
-    updatedAt: new Date(Date.now() - 86400000)
-  },
-  {
-    id: '3',
-    description: 'Garbage bin overflowing near the port',
-    photoUrls: [],
-    location: { latitude: 44.8700, longitude: 13.8400 },
-    addressText: 'Pula Port, Pula',
-    isPublic: false,
-    status: 'resolved',
-    urgencyScore: 6.1,
-    voteCount: 3,
-    userId: 'test-admin',
-    createdAt: new Date(Date.now() - 259200000), // 3 days ago
-    updatedAt: new Date(Date.now() - 172800000)
-  }
-];
+// Empty array for reports - no mock data
+const mockReports: Report[] = [];
 
 // Mock votes data
 const mockVotes = new Map<string, Set<string>>();
