@@ -157,7 +157,7 @@ export default function HomeScreen({ navigation }: any) {
             
             <Button 
               mode="outlined" 
-              onPress={() => navigation.navigate('Report Detail', { reportId: report.id })}
+              onPress={() => navigation.navigate('ReportDetail', { reportId: report.id })}
               style={styles.detailButton}
             >
               View Details
