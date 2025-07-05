@@ -168,7 +168,26 @@ export default function MyReportsScreen({ navigation }: any) {
             {/* Photos */}
             {report.photoUrls.length > 0 && (
               <View style={styles.photoContainer}>
-                <Image source={{ uri: report.photoUrls[0] }} style={styles.photo} />
+                <View style={styles.photoHeader}>
+                  <Text variant="bodySmall" style={styles.photoCount}>
+                    📸 {report.photoUrls.length} photo{report.photoUrls.length > 1 ? 's' : ''}
+                  </Text>
+                </View>
+                <ScrollView 
+                  horizontal 
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={styles.photoScroll}
+                >
+                  {report.photoUrls.map((photoUrl, index) => (
+                    <View key={index} style={styles.photoWrapper}>
+                      <Image 
+                        source={{ uri: photoUrl }} 
+                        style={styles.photo}
+                        resizeMode="cover"
+                      />
+                    </View>
+                  ))}
+                </ScrollView>
               </View>
             )}
 
@@ -291,9 +310,23 @@ const styles = StyleSheet.create({
   photoContainer: {
     marginBottom: 12,
   },
+  photoHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  photoCount: {
+    fontWeight: '600',
+  },
+  photoScroll: {
+    paddingHorizontal: 8,
+  },
+  photoWrapper: {
+    marginRight: 8,
+  },
   photo: {
-    width: '100%',
-    height: 200,
+    width: 100,
+    height: 100,
     borderRadius: 8,
   },
   reportFooter: {
