@@ -166,10 +166,10 @@ export default function MyReportsScreen({ navigation }: any) {
             </View>
 
             {/* Photos */}
-            {report.photoUrls.length > 0 && (
+            {report.photoUrls && report.photoUrls.length > 0 && (
               <View style={styles.photoContainer}>
                 <View style={styles.photoHeader}>
-                  <Text variant="bodySmall" style={styles.photoCount}>
+                  <Text variant="bodyMedium" style={styles.photoCount}>
                     📸 {report.photoUrls.length} photo{report.photoUrls.length > 1 ? 's' : ''}
                   </Text>
                 </View>
@@ -294,9 +294,13 @@ const styles = StyleSheet.create({
   description: {
     fontWeight: '600',
     marginBottom: 4,
+    fontSize: 16,
+    lineHeight: 22,
+    color: '#1a1a1a',
   },
   timestamp: {
     color: '#666',
+    fontSize: 14,
   },
   statusChip: {
     height: 24,
@@ -306,28 +310,34 @@ const styles = StyleSheet.create({
   },
   locationText: {
     color: '#666',
+    fontSize: 14,
+    lineHeight: 18,
   },
   photoContainer: {
-    marginBottom: 12,
+    marginBottom: 16,
   },
   photoHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 4,
+    marginBottom: 8,
   },
   photoCount: {
     fontWeight: '600',
+    fontSize: 16,
+    color: '#1a1a1a',
   },
   photoScroll: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 4,
   },
   photoWrapper: {
-    marginRight: 8,
+    marginRight: 12,
   },
   photo: {
-    width: 100,
-    height: 100,
-    borderRadius: 8,
+    width: 120,
+    height: 120,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
   },
   reportFooter: {
     flexDirection: 'row',
@@ -347,9 +357,12 @@ const styles = StyleSheet.create({
   statLabel: {
     color: '#666',
     fontSize: 12,
+    fontWeight: '500',
   },
   statValue: {
     fontWeight: '600',
+    fontSize: 14,
+    color: '#1a1a1a',
   },
   detailButton: {
     height: 36,
