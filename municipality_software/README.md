@@ -199,30 +199,89 @@ npm test auth.test.tsx
 npm test reportCreation.test.tsx
 ```
 
-## 🎨 Recent UI/UX Improvements
+### Code Quality
 
-- **Fixed iOS ScrollView inset issues** - Resolved excessive whitespace on iOS by applying `contentInsetAdjustmentBehavior="never"` to vertical ScrollViews
-- **Improved text wrapping** - Added proper `flexWrap`, `numberOfLines`, and `ellipsizeMode` for better text display
-- **Enhanced button styling** - Updated buttons with proper sizing, icons, and spacing
-- **Consistent layout** - Applied uniform spacing and flex layout patterns across all screens
-- **Better visual hierarchy** - Improved card layouts, spacing, and typography throughout the app
+- **ESLint** for code linting
+- **Prettier** for code formatting
+- **TypeScript** for type checking
+- **Husky** for pre-commit hooks
 
-## 📱 Features & Screens
+## 🔐 Security Rules
 
-- **Home Screen** - Feed view with reports and interactive map
-- **My Reports** - Personal report management and tracking
-- **New Report** - Create reports with photos, location, and description
-- **Admin Dashboard** - Municipality staff can manage and update report status
-- **Settings** - User profile and app preferences
-- **Authentication** - Login and registration screens
+### Firestore Rules
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read/write their own profile
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Public reports are readable by all, writable by author
+    match /reports/{reportId} {
+      allow read: if resource.data.isPublic == true || 
+                     request.auth != null && request.auth.uid == resource.data.authorId;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && 
+                               request.auth.uid == resource.data.authorId;
+    }
+  }
+}
+```
 
-## 🔒 Security & Privacy
+## 📱 Building for Production
 
-- **GDPR Compliant** - Users can delete their account and all associated data
-- **Role-based access** - Admin functions restricted to authorized users
-- **Data validation** - Input sanitization and validation on both client and server
-- **Secure storage** - All sensitive data stored in Firebase with proper security rules
+### Expo Build
 
-## 📞 Support
+```bash
+# Install EAS CLI
+npm install -g @expo/eas-cli
 
-For technical support or feature requests, please create an issue in this repository.
+# Configure build
+eas build:configure
+
+# Build for platforms
+eas build --platform ios
+eas build --platform android
+```
+
+### Environment Variables
+
+Create `.env` file in `apps/mobile/`:
+```env
+FIREBASE_API_KEY=your_api_key
+FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+FIREBASE_PROJECT_ID=your_project_id
+FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+FIREBASE_APP_ID=your_app_id
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+For support, email support@municipality-reporter.com or create an issue in the repository.
+
+## 🔄 Changelog
+
+### v1.0.0
+- Initial MVP release
+- Basic report creation and viewing
+- Authentication system
+- Map integration
+- Cloud Functions for voting and notifications 
+
+
+maps api key: AIzaSyBdpP41yHt1lHzdDEDSav6lNBKme3t3ZL0
